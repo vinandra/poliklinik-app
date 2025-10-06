@@ -15,10 +15,9 @@ return new class extends Migration
             $table->id();
             $table->string('nama');
             $table->string('alamat')->nullable();
-            // $table->foreignId('id_poli')->nullable()->constrained('poli')->cascadeOnDelete();
-            $table->string('no_ktp')->nullable();
-            $table->string('no_hp')->nullable();
-            $table->string('no_rm', 25)->nullable();
+            $table->string('no_ktp', 30)->nullable()->unique(); 
+            $table->string('no_hp', 20)->nullable(); 
+            $table->string('no_rm', 25)->nullable()->unique(); 
             $table->enum('role', ['pasien', 'dokter', 'admin']);
             $table->string('email')->unique();
             $table->string('password');
