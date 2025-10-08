@@ -31,40 +31,6 @@
                             </p>
                         </a>
                     </li>
-                    <li class="nav-item">
-                        <a href="{{ route('dokter.index') }}"
-                            class="nav-link {{ request()->routeIs('dokter.*') ? 'active' : '' }}">
-                            <i class="nav-icon fas fa-user-md"></i>
-                            <p>Manajemen Dokter</p>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="{{ route('polis.index') }}"
-                            class="nav-link {{ request()->routeIs('polis.*') ? 'active' : '' }}">
-                            <i class="nav-icon fas fa-hospital"></i>
-                            <p>
-                                Manajemen Poli
-                            </p>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="{{ route('pasien.index') }}"
-                            class="nav-link {{ request()->routeIs('pasien.*') ? 'active' : '' }}">
-                            <i class="nav-icon fas fa-user-injured"></i>
-                            <p>
-                                Manajemen Pasien
-                            </p>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="{{ route('obat.index') }}"
-                            class="nav-link {{ request()->routeIs('obat.*') ? 'active' : '' }}">
-                            <i class="nav-icon fas fa-pills"></i>
-                            <p>
-                                Manajemen Obat
-                            </p>
-                        </a>
-                    </li>
                 @endif
 
                 <!-- ROLE PASIEN -->
@@ -78,16 +44,8 @@
                             </p>
                         </a>
                     </li>
-                    <li class="nav-item">
-                        <a href="{{ route('pasien.daftar') }}"
-                            class="nav-link {{ request()->routeIs('pasien.daftar') ? 'active' : '' }}">
-                            <i class="nav-icon fas fa-hospital-user"></i>
-                            <p>
-                                Poli
-                            </p>
-                        </a>
-                    </li>
                 @endif
+
                 <!-- ROLE DOKTER -->
                 @if (request()->is('dokter*'))
                     <li class="nav-item">
@@ -96,33 +54,6 @@
                             <i class="nav-icon fas fa-columns"></i>
                             <p>
                                 Dashboard Dokter
-                            </p>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="{{ route('dokter.jadwal-periksa.index') }}"
-                            class="nav-link {{ request()->routeIs('dokter.jadwal-periksa.*') ? 'active' : '' }}">
-                            <i class="nav-icon fas fa-calendar-check"></i>
-                            <p>
-                                Jadwal Periksa
-                            </p>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="{{ route('dokter.periksa-pasien.index') }}"
-                            class="nav-link {{ request()->routeIs('dokter.periksa-pasien.*') ? 'active' : '' }}">
-                            <i class="nav-icon fas fa-stethoscope"></i>
-                            <p>
-                                Periksa Pasien
-                            </p>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="{{ route('dokter.riwayat-pasien.index') }}"
-                            class="nav-link {{ request()->routeIs('riwayat-pasien[].*') ? 'active' : '' }}">
-                            <i class="nav-icon fas fa-history"></i>
-                            <p>
-                                Riwayat Pasien
                             </p>
                         </a>
                     </li>
