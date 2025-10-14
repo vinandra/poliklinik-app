@@ -31,7 +31,26 @@
                             </p>
                         </a>
                     </li>
+                    <li class="nav-item ">
+                        <<a href="{{ route('polis.index') }}"
+                            class="nav-link {{ request()->routeIs('dokter.dashboard') ? 'active' : '' }}">
+                            <i class="nav-icon fas fa-columns"></i>
+                            <p>
+                                managemen poli
+                            </p>
+                            </a>
+                    </li>
+                    <li class="nav-item ">
+                        <<a href="{{ route('dokter.index') }}"
+                            class="nav-link {{ request()->routeIs('dokter.dashboard') ? 'active' : '' }}">
+                            <i class="nav-icon fas fa-columns"></i>
+                            <p>
+                                managemen Doktor
+                            </p>
+                            </a>
+                    </li>
                 @endif
+
 
                 <!-- ROLE PASIEN -->
                 @if (request()->is('pasien*'))
@@ -58,6 +77,7 @@
                         </a>
                     </li>
                 @endif
+
 
                 <li class="nav-item ">
                     <form method="POST" action="/logout">
