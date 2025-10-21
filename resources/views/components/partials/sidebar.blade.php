@@ -49,6 +49,24 @@
                             </p>
                             </a>
                     </li>
+                    <li class="nav-item ">
+                        <<a href="{{ route('pasien.index') }}"
+                            class="nav-link {{ request()->routeIs('dokter.dashboard') ? 'active' : '' }}">
+                            <i class="nav-icon fas fa-columns"></i>
+                            <p>
+                                managemen Pasien
+                            </p>
+                            </a>
+                    </li>
+                    <li class="nav-item ">
+                        <<a href="{{ route('obat.index') }}"
+                            class="nav-link {{ request()->routeIs('dokter.dashboard') ? 'active' : '' }}">
+                            <i class="nav-icon fas fa-columns"></i>
+                            <p>
+                                managemen Obat
+                            </p>
+                            </a>
+                    </li>
                 @endif
 
 
