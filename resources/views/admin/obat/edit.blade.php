@@ -40,8 +40,7 @@
                                         class="text-danger">*</span></label>
                                 <input type="number" id="harga" name="harga"
                                     class="form-control @error('harga') is-invalid @enderror"
-                                    value="{{ old('harga', $obat->harga) }}" required min="0"
-                                    step="1">
+                                    value="{{ old('harga', $obat->harga) }}" required min="0" step="1">
                                 @error('harga')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror

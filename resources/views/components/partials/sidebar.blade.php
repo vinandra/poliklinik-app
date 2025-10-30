@@ -94,6 +94,15 @@
                             </p>
                         </a>
                     </li>
+                    <li class="nav-item ">
+                        <<a href="{{ route('jadwal-periksa.index') }}"
+                            class="nav-link {{ request()->routeIs('jadwal-periksa.*') ? 'active' : '' }}">
+                            <i class="nav-icon fas fa-columns"></i>
+                            <p>
+                                jadwal periksa
+                            </p>
+                            </a>
+                    </li>
                 @endif
 
 
