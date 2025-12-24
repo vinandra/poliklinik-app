@@ -1,12 +1,15 @@
 <?php
 
-use App\Http\Controllers\Admin\DokterController;
-use App\Http\Controllers\Admin\ObatController;
-use App\Http\Controllers\Admin\PasienController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\Admin\ObatController;
 use App\Http\Controllers\Admin\PoliController;
+use App\Http\Controllers\Admin\DokterController;
+use App\Http\Controllers\Admin\PasienController;
+use App\Http\Controllers\Pasien\PoliController as PasienPoliController;
 use App\Http\Controllers\Dokter\JadwalPriksaController;
+use App\Http\Controllers\Dokter\PeriksaPasienController;
+use App\Http\Controllers\Dokter\RiwayatPasienController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -35,10 +38,15 @@ Route::middleware(['auth', 'role:dokter'])->prefix('dokter')->group(function (){
         return view('dokter.dashboard'); 
     })->name('dokter.dashboard'); 
     Route::resource('jadwal-periksa', JadwalPriksaController::class);
+    Route::resource('periksa-pasien', PeriksaPasienController::class);
+    Route::get('/riwayat-pasien', [RiwayatPasienController::class, 'index'])->name('dokter.riwayat-pasien.index');
+    Route::get('/riwayat-pasien/{id}', [RiwayatPasienController::class, 'show'])->name('dokter.riwayat-pasien.show');
 });
 
 Route::middleware(['auth', 'role:pasien'])->prefix('pasien')->group(function (){
     Route::get('/dashboard', function(){
         return view('pasien.dashboard'); 
     })->name('pasien.dashboard');
+    Route::get('/daftar', [PasienPoliController::class, 'get'])->name('pasien.daftar');
+    Route::post('/daftar', [PasienPoliController::class, 'submit'])->name('pasien.daftar.submit');
 });
