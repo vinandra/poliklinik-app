@@ -18,7 +18,7 @@ class PeriksaPasienController extends Controller
     {
         $dokterId = Auth::id();
 
-        $daftarPasien = DaftarPoli::with(['pasien', 'jadwalPeriksa', 'periksas'])
+        $daftarPasien = DaftarPoli::with(['pasien', 'jadwalPeriksa', 'periksa'])
             ->whereHas('jadwalPeriksa', function ($query) use ($dokterId) {
                 $query->where('id_dokter', $dokterId);
             })
@@ -37,6 +37,7 @@ class PeriksaPasienController extends Controller
     public function store(Request $request)
     {
         $request->validate([
+            'id_daftar_poli' => 'required|exists:daftar_poli,id',
             'obat_json' => 'required',
             'catatan' => 'nullable|string',
             'biaya_periksa' => 'required|integer',

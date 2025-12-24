@@ -35,7 +35,7 @@
                                     <td>{{ $dp->keluhan }}</td>
                                     <td>{{ $dp->no_antrian }}</td>
                                     <td>
-                                        @if ($dp->periksas->isNotEmpty())
+                                        @if ($dp->periksa)
                                             <span class="badge bg-success">Sudah Diperiksa</span>
                                         @else
                                             <a href="{{ route('periksa-pasien.create', $dp->id) }}"

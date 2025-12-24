@@ -38,7 +38,9 @@ Route::middleware(['auth', 'role:dokter'])->prefix('dokter')->group(function (){
         return view('dokter.dashboard'); 
     })->name('dokter.dashboard'); 
     Route::resource('jadwal-periksa', JadwalPriksaController::class);
-    Route::resource('periksa-pasien', PeriksaPasienController::class);
+    // gunakan route create dengan parameter id daftar_poli
+    Route::get('periksa-pasien/{id}/create', [PeriksaPasienController::class, 'create'])->name('periksa-pasien.create');
+    Route::resource('periksa-pasien', PeriksaPasienController::class)->except(['create']);
     Route::get('/riwayat-pasien', [RiwayatPasienController::class, 'index'])->name('dokter.riwayat-pasien.index');
     Route::get('/riwayat-pasien/{id}', [RiwayatPasienController::class, 'show'])->name('dokter.riwayat-pasien.show');
 });
