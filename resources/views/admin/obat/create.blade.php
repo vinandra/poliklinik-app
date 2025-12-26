@@ -46,6 +46,17 @@
                                 @enderror
                             </div>
 
+                            <div class="form-group mb-3">
+                                <label for="stok" class="form-label">Stok <span class="text-danger">*</span></label>
+                                <input type="number" id="stok" name="stok"
+                                    class="form-control @error('stok') is-invalid @enderror"
+                                    value="{{ old('stok', 0) }}" min="0" step="1" required>
+                                @error('stok')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                                <small class="text-muted">Isi stok awal, bisa ditambah/kurangi manual lewat edit.</small>
+                            </div>
+
                             <div class="form-group mt-4">
                                 <button type="submit" class="btn btn-success">
                                     <i class="fas fa-save"></i> Simpan

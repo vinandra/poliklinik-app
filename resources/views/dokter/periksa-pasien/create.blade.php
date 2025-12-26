@@ -5,6 +5,13 @@
             <div class="col-lg-8 offset-lg-2">
                 <h1 class="mb-4">Periksa Pasien</h1>
 
+                @if (session('message'))
+                    <div class="alert alert-{{ session('type', 'success') }} alert-dismissible fade show" role="alert">
+                        {{ session('message') }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                @endif
+
                 <div class="card">
                     <div class="card-body">
                         <form action="{{ route('periksa-pasien.store') }}" method="POST">
@@ -18,11 +25,14 @@
                                     <option value="">-- Pilih Obat --</option>
                                     @foreach ($obats as $obat)
                                         <option value="{{ $obat->id }}" data-nama="{{ $obat->nama_obat }}"
-                                            data-harga="{{ $obat->harga }}">
+                                            data-harga="{{ $obat->harga }}" data-stok="{{ $obat->stok }}"
+                                            {{ $obat->stok <= 0 ? 'disabled' : '' }}>
                                             {{ $obat->nama_obat }} - Rp{{ number_format($obat->harga) }}
+                                            (Stok: {{ $obat->stok }})
                                         </option>
                                     @endforeach
                                 </select>
+                                <small class="text-muted">Obat dengan stok habis dinonaktifkan.</small>
                             </div>
 
                             <div class="form-group mb-3">
@@ -66,8 +76,9 @@
         const id = selectedOption.value;
         const nama = selectedOption.dataset.nama;
         const harga = parseInt(selectedOption.dataset.harga || 0);
+        const stok = parseInt(selectedOption.dataset.stok || 0);
 
-        if (!id || daftarObat.some(o => o.id == id)) {
+        if (!id || daftarObat.some(o => o.id == id) || stok <= 0) {
             return;
         }
 

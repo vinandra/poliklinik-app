@@ -24,7 +24,8 @@
                                 <th>Nama Obat</th>
                                 <th>Kemasan</th>
                                 <th>Harga</th>
-                                <th style="width: 150px;">Aksi</th>
+                                <th>Stok</th>
+                                <th style="width: 180px;">Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -33,6 +34,19 @@
                                     <td>{{ $obat->nama_obat }}</td>
                                     <td>{{ $obat->kemasan ?? '-' }}</td>
                                     <td>Rp{{ number_format($obat->harga, 0, ',', '.') }}</td>
+                                    <td>
+                                        @php
+                                            $isLow = $obat->stok <= 5;
+                                        @endphp
+                                        <span class="badge {{ $obat->stok > 0 ? 'bg-success' : 'bg-danger' }}">
+                                            {{ $obat->stok }} Unit
+                                        </span>
+                                        @if ($isLow && $obat->stok > 0)
+                                            <span class="badge bg-warning text-dark">Stok Menipis</span>
+                                        @elseif($obat->stok <= 0)
+                                            <span class="badge bg-danger">Stok Habis</span>
+                                        @endif
+                                    </td>
                                     <td>
                                         <a href="{{ route('obat.edit', $obat->id) }}" class="btn btn-sm btn-warning">
                                             <i class="fas fa-edit"></i> Edit
@@ -50,7 +64,7 @@
                                 </tr>
                             @empty
                                 <tr>
-                                    <td class="text-center" colspan="4">Belum ada data obat.</td>
+                                    <td class="text-center" colspan="5">Belum ada data obat.</td>
                                 </tr>
                             @endforelse
                         </tbody>

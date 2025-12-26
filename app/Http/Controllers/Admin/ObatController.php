@@ -25,12 +25,14 @@ class ObatController extends Controller
             'nama_obat' => 'required|string|max:255',
             'kemasan' => 'nullable|string|max:35',
             'harga' => 'required|integer|min:0',
+            'stok' => 'required|integer|min:0',
         ]);
 
         Obat::create([
             'nama_obat' => $request->nama_obat,
             'kemasan' => $request->kemasan,
             'harga' => $request->harga,
+            'stok' => $request->stok,
         ]);
 
         return redirect()->route('obat.index')
@@ -48,13 +50,15 @@ class ObatController extends Controller
         $request->validate([
             'nama_obat' => 'required|string|max:255',
             'kemasan' => 'nullable|string|max:35',
-            'harga' => 'required|integer|min:0'
+            'harga' => 'required|integer|min:0',
+            'stok' => 'required|integer|min:0'
         ]);
 
         $obat->update([
             'nama_obat' => $request->nama_obat,
             'kemasan' => $request->kemasan,
             'harga' => $request->harga,
+            'stok' => $request->stok,
         ]);
         
         return redirect()->route('obat.index')->with('message', 'Data obat Berhasil di ubah')->with('type', 'success');
