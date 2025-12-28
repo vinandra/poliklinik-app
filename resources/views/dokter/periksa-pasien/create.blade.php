@@ -25,14 +25,13 @@
                                     <option value="">-- Pilih Obat --</option>
                                     @foreach ($obats as $obat)
                                         <option value="{{ $obat->id }}" data-nama="{{ $obat->nama_obat }}"
-                                            data-harga="{{ $obat->harga }}" data-stok="{{ $obat->stok }}"
-                                            {{ $obat->stok <= 0 ? 'disabled' : '' }}>
+                                            data-harga="{{ $obat->harga }}" data-stok="{{ $obat->stok }}">
                                             {{ $obat->nama_obat }} - Rp{{ number_format($obat->harga) }}
                                             (Stok: {{ $obat->stok }})
                                         </option>
                                     @endforeach
                                 </select>
-                                <small class="text-muted">Obat dengan stok habis dinonaktifkan.</small>
+                                <div id="alert-stok" class="mt-2"></div>
                             </div>
 
                             <div class="form-group mb-3">
@@ -68,6 +67,7 @@
     const inputBiaya = document.getElementById('biaya_periksa');
     const inputObatJson = document.getElementById('obat_json');
     const totalHargaEl = document.getElementById('total-harga');
+    const alertStok = document.getElementById('alert-stok');
 
     let daftarObat = [];
 
@@ -78,9 +78,11 @@
         const harga = parseInt(selectedOption.dataset.harga || 0);
         const stok = parseInt(selectedOption.dataset.stok || 0);
 
-        if (!id || daftarObat.some(o => o.id == id) || stok <= 0) {
+        if (!id || daftarObat.some(o => o.id == id)) {
             return;
         }
+
+        tampilkanPeringatanStok(stok, nama);
 
         daftarObat.push({
             id,
@@ -115,5 +117,26 @@
     function hapusObat(index) {
         daftarObat.splice(index, 1);
         renderObat();
+    }
+
+    function tampilkanPeringatanStok(stok, nama) {
+        alertStok.innerHTML = '';
+
+        if (stok === 0) {
+            alertStok.innerHTML = `
+                <div class="alert alert-danger py-2 mb-0" role="alert">
+                    Stok ${nama} habis. Mohon pastikan ketersediaan sebelum diberikan.
+                </div>
+            `;
+            return;
+        }
+
+        if (stok < 5) {
+            alertStok.innerHTML = `
+                <div class="alert alert-warning py-2 mb-0" role="alert">
+                    Stok ${nama} menipis (${stok} tersisa).
+                </div>
+            `;
+        }
     }
 </script>
